@@ -26,4 +26,5 @@ Route::group([
     'namespace'  => 'V1',
 ], function () {
     Route::get('user/index', 'UserController@index');
+    Route::get('user/role', 'UserController@getUserRole');
 });

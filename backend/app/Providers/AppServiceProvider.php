@@ -2,6 +2,8 @@
 
 namespace Nero\Providers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //记录慢查询
+        DB::listen(function ($query) {
+            Log::warning('[query slow log]'.json_encode($query));
+            if ($query->time > 500) {
+                Log::warning('[query slow log]'.json_encode($query));
+            }
+        });
     }
 
     /**

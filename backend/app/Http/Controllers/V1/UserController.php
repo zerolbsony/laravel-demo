@@ -8,6 +8,7 @@
 namespace Nero\Http\Controllers\V1;
 
 use Illuminate\Routing\Controller;
+use Nero\Http\Models\UserModel;
 
 class UserController extends Controller
 {
@@ -15,5 +16,24 @@ class UserController extends Controller
     {
         echo "User";
         return ;
+    }
+
+    public function getUserRole()
+    {
+        $uid = 1;
+        $user = UserModel::find($uid);
+
+        foreach($user->roles as $role){
+            echo "<pre>";
+            echo $role->name;
+            echo "<br>";
+            echo $user->name;
+            echo "<br>";
+            echo $role->pivot->created_at;
+            echo "<br>";
+            echo $role->pivot->updated_at;
+            echo "<br>";
+            echo "</pre>";
+        }
     }
 }
