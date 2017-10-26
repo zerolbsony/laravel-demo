@@ -13,8 +13,8 @@ class BookModel extends Model
 {
     protected $table = 'books';
 
-    public function borrow()
+    public function borrowRecords()
     {
-        return $this->belongsTo(UserModel::class, 'borrow_user_id', 'id');
+        return $this->morphMany(BorrowRecordModel::class, 'borrowable');
     }
 }

@@ -13,4 +13,8 @@ class MovieModel extends Model
 {
     protected $table = 'movies';
 
+    public function borrowRecords()
+    {
+        return $this->morphMany(BorrowRecordModel::class, 'borrowable');
+    }
 }

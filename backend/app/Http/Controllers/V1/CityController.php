@@ -8,7 +8,6 @@
 
 namespace Nero\Http\Controllers\V1;
 
-
 use Illuminate\Routing\Controller;
 use Nero\Http\Models\CityModel;
 

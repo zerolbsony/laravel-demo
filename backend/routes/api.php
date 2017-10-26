@@ -25,7 +25,9 @@ Route::group([
 //    'middleware' => ["auth:api", 'http_request'],//该配置会认证以api开头的接口?
     'namespace'  => 'V1',
 ], function () {
+    Route::get('index', 'IndexController@index');
     Route::get('user/index', 'UserController@index');
     Route::get('user/role', 'UserController@getUserRole');
     Route::get('city/comments', 'CityController@comments');
+    Route::get('book/borrowRecords', 'BookController@borrowRecords');
 });
