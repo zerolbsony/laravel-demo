@@ -27,4 +27,5 @@ Route::group([
 ], function () {
     Route::get('user/index', 'UserController@index');
     Route::get('user/role', 'UserController@getUserRole');
+    Route::get('city/comments', 'CityController@comments');
 });
