@@ -27,4 +27,21 @@ class BookController extends Controller
         }
         //sql:select * from `borrow_records` where `borrow_records`.`borrowable_id` = 1 and `borrow_records`.`borrowable_id` is not null and `borrow_records`.`borrowable_type` = Nero\Http\Models\BookModel
     }
+
+    public function tags()
+    {
+        $bookId = 1;
+        $book = BookModel::find($bookId);
+
+        echo $book->name;
+        echo "<br>";
+        echo "<pre>";
+        echo "标签名称：";
+        echo "<br>";
+        foreach ($book->tags as $tag){
+            echo $tag->name;
+            echo "<br>";
+        }
+        echo "</pre>";
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Nero\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
                 Log::warning('[query slow log]'.json_encode($query));
             }
         });
+
+        Relation::morphMap([
+            'movies' => 'Nero\Http\Models\MovieModel',
+            'books' => 'Nero\Http\Models\BookModel',
+        ]);
     }
 
     /**

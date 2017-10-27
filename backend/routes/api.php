@@ -30,4 +30,6 @@ Route::group([
     Route::get('user/role', 'UserController@getUserRole');
     Route::get('city/comments', 'CityController@comments');
     Route::get('book/borrowRecords', 'BookController@borrowRecords');
+    Route::get('book/tags', 'BookController@tags');
+    Route::get('borrow/record', 'BorrowController@borrowRecords');
 });

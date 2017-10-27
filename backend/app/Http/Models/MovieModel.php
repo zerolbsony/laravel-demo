@@ -17,4 +17,9 @@ class MovieModel extends Model
     {
         return $this->morphMany(BorrowRecordModel::class, 'borrowable');
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(TagModel::class, 'taggable','taggables','taggable_id','tag_id');
+    }
 }
