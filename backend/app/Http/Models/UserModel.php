@@ -30,4 +30,9 @@ class UserModel extends Model
         return $this->belongsToMany(RoleModel::class, 'role_user','user_id','role_id')->withPivot('created_at', 'updated_at')->withTimestamps();
 //        return $this->belongsToMany(RoleModel::class, 'role_user','user_id','role_id')->wherePivot('created_at', '<=', new Carbon(time())->toDateTimeString());//中间表过滤结果
     }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentModel::class,'user_id','id');
+    }
 }

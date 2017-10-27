@@ -20,6 +20,10 @@ class IndexController extends Controller
         echo "<br>";
         echo "<a href='http://laravel.local/api/v1/city/comments' target='_blank'>远程一对多</a>";
         echo "<br>";
+        echo "<a href='http://laravel.local/api/v1/book/borrowRecords' target='_blank'>多态关联</a>";
+        echo "<br>";
+        echo "<a href='http://laravel.local/api/v1/book/tags' target='_blank'>多对多多态关联</a>";
+        echo "<br>";
         echo "</pre>";
     }
 }

@@ -15,5 +15,11 @@ class CommentModel extends Model
 {
     protected $table = 'comments';
 
+    public function books()
+    {
+    }
 
+    public function movies()
+    {
+    }
 }

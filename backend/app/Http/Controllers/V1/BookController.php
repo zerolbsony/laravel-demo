@@ -43,5 +43,15 @@ class BookController extends Controller
             echo "<br>";
         }
         echo "</pre>";
+
+        $books = BookModel::has('tags', '>=', 3)->get();
+        echo "<pre>";
+        echo "三个以上标签的书：";
+        echo "<br>";
+        foreach($books as $book){
+            echo $book['name'];
+            echo "<br>";
+        }
+        echo "</pre>";
     }
 }

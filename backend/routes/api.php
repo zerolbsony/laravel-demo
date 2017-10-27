@@ -28,6 +28,7 @@ Route::group([
     Route::get('index', 'IndexController@index');
     Route::get('user/index', 'UserController@index');
     Route::get('user/role', 'UserController@getUserRole');
+    Route::get('user/comments', 'UserController@comments');
     Route::get('city/comments', 'CityController@comments');
     Route::get('book/borrowRecords', 'BookController@borrowRecords');
     Route::get('book/tags', 'BookController@tags');
