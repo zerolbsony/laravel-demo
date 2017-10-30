@@ -24,6 +24,10 @@ class IndexController extends Controller
         echo "<br>";
         echo "<a href='http://laravel.local/api/v1/book/tags' target='_blank'>多对多多态关联</a>";
         echo "<br>";
+        echo "<a href='http://laravel.local/api/v1/book/comments' target='_blank'>预加载多个模型、嵌套预加载模型</a>";
+        echo "<br>";
+        echo "<a href='http://laravel.local/api/v1/book/count' target='_blank'>关联模型计数</a>";
+        echo "<br>";
         echo "</pre>";
     }
 }

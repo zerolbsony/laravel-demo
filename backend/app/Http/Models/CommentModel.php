@@ -22,4 +22,9 @@ class CommentModel extends Model
     public function movies()
     {
     }
+
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class);
+    }
 }

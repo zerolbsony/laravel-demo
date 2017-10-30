@@ -9,6 +9,7 @@ namespace Nero\Http\Controllers\V1;
 
 use Illuminate\Routing\Controller;
 use Nero\Http\Models\BookModel;
+use Nero\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
@@ -53,5 +54,52 @@ class BookController extends Controller
             echo "<br>";
         }
         echo "</pre>";
+    }
+
+    public function count()
+    {
+        $books = BookModel::withCount(['borrowRecords', 'comments'])->get();
+
+        echo "borrow records count is:";
+        echo $books[0]->borrow_records_count;
+        echo "<br>";
+
+
+        echo "comments count is:";
+        echo $books[0]->comments_count;
+        echo "<br>";
+    }
+
+    public function comments()
+    {
+        //嵌套预加载
+        $book = BookModel::with('comments.user')->get();
+        //预加载关联多个模型
+//        $book = BookModel::with(['borrowRecords','comments'])->get();
+
+        foreach ($book as $_book){
+            echo "<pre>";
+            echo $_book->name;
+            echo "<br>";
+            echo $_book->created_at;
+            echo "<br>";
+            foreach ($_book->comments as $comment){
+                echo "<pre>";
+                echo $comment->title;
+                echo "<br>";
+                echo $comment->body;
+                echo "<br>";
+                echo "</pre>";
+            }
+            echo "</pre>";
+        }
+    }
+
+    public function commentInfo()
+    {
+        //多个模型时用这种写法
+        return BookResource::collection(BookModel::with('comments')->get());
+        //这种写法只接收单个模型
+//        return new BookResource(BookModel::find(1));
     }
 }
