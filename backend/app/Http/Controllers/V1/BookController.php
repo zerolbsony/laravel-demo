@@ -9,6 +9,7 @@ namespace Nero\Http\Controllers\V1;
 
 use Illuminate\Routing\Controller;
 use Nero\Http\Models\BookModel;
+use Nero\Http\Collections\BookCollection;
 use Nero\Http\Resources\BookResource;
 
 class BookController extends Controller
@@ -97,8 +98,10 @@ class BookController extends Controller
 
     public function commentInfo()
     {
+        //延迟加载并且与data同级别的meta参数
+        return new BookCollection(BookModel::all()->load('comments'));
         //多个模型时用这种写法
-        return BookResource::collection(BookModel::with('comments')->get());
+//        return BookResource::collection(BookModel::with('comments')->get());
         //这种写法只接收单个模型
 //        return new BookResource(BookModel::find(1));
     }

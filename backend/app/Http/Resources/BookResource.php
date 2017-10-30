@@ -21,4 +21,13 @@ class BookResource extends Resource
             'comments' => CommentResource::collection($this->whenLoaded('comments')),//依赖控制器里用with关联comments模型，否则不会返回这个键值给页面
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'meta' => [
+                'key' => 'value',
+            ],
+        ];
+    }
 }
