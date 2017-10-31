@@ -22,12 +22,8 @@ class BookResource extends Resource
         ];
     }
 
-    public function with($request)
+    public function withResponse($request, $response)
     {
-        return [
-            'meta' => [
-                'key' => 'value',
-            ],
-        ];
+        $response->header('X-Value', 'True');
     }
 }

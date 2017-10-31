@@ -35,5 +35,6 @@ Route::group([
     Route::get('book/count', 'BookController@count');
     Route::get('book/comments', 'BookController@comments');
     Route::get('book/commentInfo', 'BookController@commentInfo');
+    Route::get('book/info', 'BookController@info');
     Route::get('borrow/record', 'BorrowController@borrowRecords');
 });

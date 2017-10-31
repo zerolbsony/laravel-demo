@@ -13,6 +13,16 @@ class BookModel extends Model
 {
     protected $table = 'books';
 
+    protected $fillable = ['name','author'];
+    protected $visible = ['name','created_at','updated_at'];
+    protected $hidden = ['author'];
+    protected $appends = ['updated_at'];
+
+    public function getUpdatedAtAttribute()
+    {
+//        return '<font color="red">'.$this->updated_at.'</font>';
+    }
+
     public function borrowRecords()
     {
         return $this->morphMany(BorrowRecordModel::class, 'borrowable');

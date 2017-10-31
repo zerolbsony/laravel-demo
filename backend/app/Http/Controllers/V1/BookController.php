@@ -99,10 +99,21 @@ class BookController extends Controller
     public function commentInfo()
     {
         //延迟加载并且与data同级别的meta参数
-        return new BookCollection(BookModel::all()->load('comments'));
+//        return new BookCollection(BookModel::all()->load('comments'));
         //多个模型时用这种写法
-//        return BookResource::collection(BookModel::with('comments')->get());
+        return BookResource::collection(BookModel::with('comments')->get());
         //这种写法只接收单个模型
 //        return new BookResource(BookModel::find(1));
+    }
+
+    public function info()
+    {
+        BookModel::create([
+            'name' => '安徒生的童话',
+            'author' => '安徒生',
+        ]);
+        return BookModel::where('name', 'lucy')->firstOrFail();
+        return BookModel::where('name', '安徒生的童话')->firstOrFail();
+        return BookModel::find(1)->first();
     }
 }
