@@ -8,6 +8,7 @@
 namespace Nero\Http\Controllers\V1;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Nero\Http\Models\BookModel;
 use Nero\Http\Collections\BookCollection;
 use Nero\Http\Resources\BookResource;
@@ -108,6 +109,8 @@ class BookController extends Controller
 
     public function info()
     {
+        $model = BookModel::find(1);
+        print_r($model->history());exit;
         BookModel::create([
             'name' => '安徒生的童话',
             'author' => '安徒生',
@@ -115,5 +118,32 @@ class BookController extends Controller
         return BookModel::where('name', 'lucy')->firstOrFail();
         return BookModel::where('name', '安徒生的童话')->firstOrFail();
         return BookModel::find(1)->first();
+    }
+
+    public function lock()
+    {
+        DB::transaction(function(){
+            $book = BookModel::sharedLock()->find(1);
+//            $book = BookModel::lockForUpdate()->find(1);
+            $book->author = '张三';
+            sleep(5);
+            $book->save();
+        },100);//此时由于可以100次失败，那么先执行lock，在执行lock1，最后结果作者是张三，这里死锁重试次数将结果出人意料，其实就是谁先更新是谁的，死锁的只要等到不死锁就能更新成功，等不到就抛异常结束了
+        $book = BookModel::find(1)->first();
+        print_r($book);
+    }
+
+    //SQLSTATE[40001]: Serialization failure: 1213 Deadlock found when trying to get lock; try restarting transaction (SQL: update `books` set `author` = 李四, `updated_at` = 2017-11-01 06:49:03 where `id` = 1)
+    public function lock1()
+    {
+        DB::transaction(function(){
+            $book = BookModel::sharedLock()->find(1);
+//            $book = BookModel::lockForUpdate()->find(1);
+            $book->author = '李四';
+//            sleep(5);
+            $book->save();
+        },50);
+        $book = BookModel::find(1)->first();
+        print_r($book);
     }
 }
