@@ -8,13 +8,18 @@
 namespace Nero\Http\Controllers\V1;
 
 use Illuminate\Routing\Controller;
+use Nero\Http\Models\AccountModel;
 use Nero\Http\Models\UserModel;
 
 class UserController extends Controller
 {
     public function index()
     {
-        echo "User";
+        $user = UserModel::find(1);
+        $account = AccountModel::find(2);
+        //只有belongsTo的关系才能这么写
+        $user->account()->associate($account);
+        $user->save();
         return ;
     }
 

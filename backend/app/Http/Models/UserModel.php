@@ -35,4 +35,9 @@ class UserModel extends Model
     {
         return $this->hasMany(CommentModel::class,'user_id','id');
     }
+
+    public function account()
+    {
+        return $this->belongsTo(AccountModel::class);
+    }
 }
